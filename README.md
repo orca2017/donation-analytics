@@ -2,7 +2,7 @@
 This program requires C++ 11, at least.
 
 Program takes about 10 minutes to process 20,000,000 records/lines
-(that is a ~4GB txt file, consumes max 562MB memory).
+(that is a ~4GB txt file, consumes max 562MB memory, intel core i7 6700 cpu).
 Memory consumption mainly due to saved hash maps; more records processed, more memory consumption.
 
 
