@@ -7,6 +7,7 @@ using namespace std;
 int main(int argc, char* argv[]){
 
     /*
+    // test
     //TxtHandler *file = new TxtHandler("/home/xinzhan/Downloads/indiv16/itcont.txt");
     //TxtHandler *file = new TxtHandler("test.txt", fstream::out);
     //TxtHandler *file = new TxtHandler("itcont.txt");
