@@ -13,7 +13,8 @@ and one c++ struct: Entry.
 
 struct Entry:
 
-    This struct stores all the fields that we are interested. cmte_id, name, zip_code, data, transaction_amt, and other id. All in string format.
+    This struct stores all the fields that we are interested.
+    cmte_id, name, zip_code, data, transaction_amt, and other id. All in string format.
 
 class TxtHandler:
 
