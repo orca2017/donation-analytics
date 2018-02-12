@@ -5,24 +5,31 @@ Program takes about 10 minutes to process 20,000,000 records/lines
 (that is a ~4GB txt file, consumes max 562MB memory).
 Memory consumption mainly due to saved hash maps; more records processed, more memory consumption.
 
+
+-------------------------------------------------------------------------------------------------------
+
 Program is organized in 4 classes: TxtHandler, RecordParser, RepeatDonor, Analyzer,
 and one c++ struct: Entry.
 
 struct Entry:
+
     This struct stores all the fields that we are interested. cmte_id, name, zip_code, data, transaction_amt, and other id. All in string format.
 
 class TxtHandler:
+
     This is a wrapper class for c++ fstream, handles input and output of text files.
     To simplify code, only two modes are supported: read mode and write mode. 
     Class returns each record in a string format.
 
 class RecordParser:
+
     This is a Singleton class, this class parse each entry that fed from TxtHandler, it extracts
     the interested fields, following the rules as described by FEC website.
     This class also do validation check for each entry, only donations coming from people 
     are valid, it also checks the format of date, name, transaction amount and cmte_id;
 
 class RepeatDonor:
+
     This is also a Singleton class, it keeps a hash map. For each record, it will check its
     internal hash map, if it found the corresponding donor, then the record comes from a 
     repeat donor, if not found, then it will update the record to the hash map, and return false.
@@ -37,6 +44,7 @@ class RepeatDonor:
     hash map, class will return false and update hash map to the earlier year. 
 
 class Records:
+
     This is also a Singleton class, it keeps two hash maps, hash_map_1 is:
     unordered_map<string, vector<int>>
     where key = cmte_id + zip_code + year; value = a vector<int>, which stores each donation dollar amount
@@ -54,6 +62,7 @@ class Records:
     to sum all vector elements each time. This sacrifices space complexity for a better time complexity.
 
 class Analyzer:
+
     This is the overall entrance class, everything is called inside this class's member Analyze()
 
     it first calls TxtHandler to get an entry, then pass this entry to RecordParser, then to RepeatDonor,
