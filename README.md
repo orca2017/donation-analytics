@@ -73,7 +73,7 @@ class Analyzer:
     This class also read percentile.txt, and saves the percentile number to be calculated.
 
 -------------------------------------------------------------------------------------------------------
-A little extra words about this program:
+A few extra words about this program:
 
   Besides implementing all the requirements as described on Code Challenge github, I also have two
   more checks:
