@@ -311,7 +311,7 @@ void Records::InsertAmt(vector<int> &v, int &amt){
 
     int s = v.size();
     if(s <= 0) {
-	cout<<"Someting funny happened..."<<endl;
+	cout<<"Heap Insertion: Something funny happened..."<<endl;
 	exit(-1);
     }
     // insert element to heap
