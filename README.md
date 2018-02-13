@@ -2,18 +2,18 @@
 This program requires C++ 11, at least.
 
 Program takes about 10 minutes to process 20,000,000 records/lines
-(that is a ~4GB txt file, consumes max 562MB memory, intel core i7 6700 cpu).
-Memory consumption mainly due to saved hash maps; more records processed, more memory consumption.
+(that is a ~4GB txt file, consumes max 562MB memory, on a intel core i7 6700 desktop).
+Memory consumption mainly due to saved hash maps; so more records processed, more memory consumption.
 
 
 -------------------------------------------------------------------------------------------------------
 
 Program is organized in 4 classes: TxtHandler, RecordParser, RepeatDonor, Analyzer,
-and one c++ struct: Entry.
+and one C++ struct named Entry.
 
 struct Entry:
 
-    This struct stores all the fields that we are interested.
+    This struct stores all 5 fields that we interested.
     cmte_id, name, zip_code, data, transaction_amt, and other id. All in string format.
 
 class TxtHandler:
@@ -24,22 +24,22 @@ class TxtHandler:
 
 class RecordParser:
 
-    This is a Singleton class, this class parse each entry that fed from TxtHandler, it extracts
-    the interested fields, following the rules as described by FEC website.
+    This is a Singleton class, this class parse each entry that comes from TxtHandler, and extracts
+    the interested fields following the rules as described by FEC website.
     This class also do validation check for each entry, only donations coming from people 
     are valid, it also checks the format of date, name, transaction amount and cmte_id;
 
 class RepeatDonor:
 
     This is also a Singleton class, it keeps a hash map. For each record, it will check its
-    internal hash map, if it found the corresponding donor, then the record comes from a 
+    internal hash map, if it finds the corresponding donor, then the record comes from a 
     repeat donor, if not found, then it will update the record to the hash map, and return false.
 
     The hash map is implemented using c++11 unordered_map<string, int>, the key is a string, and 
     the value is an int. value = earlist year. key = name+zip_code.
 
     For the hash map, The reason that I keep "val = year" is, according to readme.txt in github, 
-    whether we treat a record repeat or not depends on whether the same donor makes donations in 
+    whether we treat a record is repeat or not depends on whether the same donor makes donations in 
     previous years. So while checking, this class will compare the year 
     of current record with the year stored in the hash map, if it is earlier than the one in
     hash map, class will return false and update hash map to the earlier year. 
@@ -79,8 +79,11 @@ A few extra words about this program:
   more checks:
 
     1, This code challenge said checking DATE format, I assume all dates must be in MMDDYYYY format,
-       otherwise treat it as invalid format
-    2, Chanllenge also said checking NAME format, I only require name is not empty
+       otherwise treat it as invalid format. Because challenge does not specify what formats are
+       correct, and there are various of ways to express date, it is unreasonalbe to exhaust all 
+       valid formats.
+    2, Chanllenge also said checking NAME format, I only require name is not empty, reason is same 
+       as the above one.
 
 
 
