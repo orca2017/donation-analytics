@@ -455,6 +455,13 @@ void Analyzer::GetPercentile(const char *path){
     tmp = RecordParser::Instance()->Strip(tmp);
 
     percentile = stof(tmp);
+
+    if(percentile <= 0){
+	cout<<"GetPercentile Warning:: recieved an unreasonable percentile"
+	    <<"please check your percentile.txt file."
+	    <<"it should only contain one number, no spaces"
+	    <<endl;
+    }
 }
 
 
