@@ -293,7 +293,16 @@ unordered_map<string, std::vector<int>> & Records::GetRecords(){
 void Records::Push(const Entry &e){
 
     string index = _hash(e);
-    int amt = static_cast<int>(round(stof(e.transaction_amt)));
+
+    float tmp = 0;
+    try{
+	tmp = stof(e.transaction_amt);
+    }catch(...){
+	cout<<"Unexpected transaction_amt format encountered..."
+	    <<endl;
+    }
+
+    int amt = static_cast<int>(round(tmp));
 
     if(dic.find(index) == dic.end()){
 
@@ -454,7 +463,13 @@ void Analyzer::GetPercentile(const char *path){
 
     tmp = RecordParser::Instance()->Strip(tmp);
 
-    percentile = stof(tmp);
+    try{
+	percentile = stof(tmp);
+    } catch(...){
+	cout<<"Unexpected percentile format encountered..."
+	    <<"please check your percentile.txt file."
+	    <<endl;
+    }
 
     if(percentile <= 0){
 	cout<<"GetPercentile Warning:: recieved an unreasonable percentile"
